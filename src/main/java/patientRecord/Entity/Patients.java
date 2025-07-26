@@ -1,7 +1,14 @@
 package patientRecord.Entity;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -9,6 +16,7 @@ import jakarta.persistence.Table;
 public class Patients {
 	
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
 	
@@ -16,6 +24,15 @@ public class Patients {
 	private String disease;
 	
 	private String admittedDate;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Doc_id")
+	private List<Disease> Disease;
+	
+	
+	public void setDisease(List<Disease> disease) {
+		Disease = disease;
+	}
 
 	public int getId() {
 		return id;
