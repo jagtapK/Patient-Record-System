@@ -14,22 +14,21 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Patient_Details")
 public class Patients {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String name;
-	
+
 	private int age;
 	private String disease;
-	
+
 	private String admittedDate;
-	
+
 	@OneToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Doc_id")
 	private List<Disease> Disease;
-	
-	
+
 	public void setDisease(List<Disease> disease) {
 		Disease = disease;
 	}
@@ -79,6 +78,5 @@ public class Patients {
 		return "Patients [id=" + id + ", name=" + name + ", age=" + age + ", disease=" + disease + ", admittedDate="
 				+ admittedDate + "]";
 	}
-	
-	
+
 }

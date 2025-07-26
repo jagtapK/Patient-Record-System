@@ -13,37 +13,38 @@ import patientRecord.Utility.PatientRecordUtility;
 
 public class Add_Details {
 
-	public static void main(String[] args) {
-		
-		//One to Many
-		
-		SessionFactory factory =PatientRecordUtility.getSessionFactory();
-        Session session = factory.openSession();
-        Transaction transaction = session.beginTransaction();
-        
-        Patients p = new Patients();;
-        p.setName("Anjali");
-        p.setAge(20);
-        p.setDisease("Cough");
-        p.setAdmittedDate("12/2/2022");
-        
-        Disease d = new Disease();
-        d.setD1Name("Cold");
-        d.setD2Name("Korona");
-        
-        Disease d2 = new Disease();
-        d2.setD1Name("Cold");
-        d2.setD2Name("Viral Infection");
-        
-        List<Disease> list = Arrays.asList(d, d2);
-        p.setDisease(list);
-        
-        session.persist(p);
+	public void Set_Details() {
 
-        transaction.commit();
-        session.close();
-        
-        
+		// One to Many
+
+		SessionFactory factory = PatientRecordUtility.getSessionFactory();
+		Session session = factory.openSession();
+		Transaction transaction = session.beginTransaction();
+
+		Patients p = new Patients();
+		;
+		p.setName("Anjali");
+		p.setAge(20);
+		p.setDisease("Cough");
+		p.setAdmittedDate("12/2/2022");
+
+		Disease d = new Disease();
+		d.setD1Name("Cold");
+		d.setD2Name("Korona");
+
+		Disease d2 = new Disease();
+		d2.setD1Name("Cold");
+		d2.setD2Name("Viral Infection");
+		session.persist(d);
+		session.persist(d2);
+
+		List<Disease> list = Arrays.asList(d, d2);
+		p.setDisease(list);
+		session.persist(p);
+
+		transaction.commit();
+		session.close();
+
 	}
 
 }
